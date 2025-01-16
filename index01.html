@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 550px;
+        }
+
+        .container p{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-style: oblique;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group input[type="radio"],
+        .form-group input[type="checkbox"] {
+            width: auto;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #218838;
+        }
+
+        .error {
+            color: red;
+            display: none;
+            font-size: 12px;
+        }
+
+        /* Custom styling for the subjects section */
+        .subjects-label {
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Exam Registration Form</h2>
+        <p> By-->ASSR</p>
+
+        <form id="examForm">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name">
+                <small class="error" id="nameError">Please enter your full name.</small>
+            </div>
+
+            <!-- Date of Birth -->
+            <div class="form-group">
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob">
+                <small class="error" id="dobError">Please select your date of birth.</small>
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email">
+                <small class="error" id="emailError">Please enter a valid email.</small>
+            </div>
+
+            <!-- Phone -->
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="tel" id="phone" name="phone" placeholder="Enter your phone number">
+                <small class="error" id="phoneError">Please enter a valid phone number.</small>
+            </div>
+
+            <!-- Gender -->
+            <div class="form-group">
+                <label>Gender</label>
+                <label><input type="radio" name="gender" value="male"> Male</label>
+                <label><input type="radio" name="gender" value="female"> Female</label>
+                <small class="error" id="genderError">Please select your gender.</small>
+            </div>
+
+            <!-- Subject Selection -->
+            <div class="form-group">
+                <label class="subjects-label">Select Subjects (Max 3)</label>
+                <label><input type="checkbox" name="subject" value="Mathematics"> Mathematics</label>
+                <label><input type="checkbox" name="subject" value="Physics"> Physics</label>
+                <label><input type="checkbox" name="subject" value="Chemistry"> Chemistry</label>
+                <label><input type="checkbox" name="subject" value="Biology"> Biology</label>
+                <label><input type="checkbox" name="subject" value="English"> English</label>
+                <small class="error" id="subjectError">Please select up to 3 subjects.</small>
+            </div>
+
+            <!-- Exam Center -->
+            <div class="form-group">
+                <label for="center">Preferred Exam Center</label>
+                <select id="center" name="center">
+                    <option value="">Select your exam center</option>
+                    <option value="New York">GORAKPUR </option>
+                    <option value="Los Angeles">CHAPRA</option>
+                    <option value="Chicago">GUJARAT</option>
+                </select>
+                <small class="error" id="centerError">Please select an exam center.</small>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit">Submit Registration</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- <script>
+        // JavaScript validation
+        document.getElementById('examForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            let valid = true;
+
+            // Full Name validation
+            const name = document.getElementById('name').value.trim();
+            if (name === "") {
+                document.getElementById('nameError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('nameError').style.display = 'none';
+            }
+
+            // DOB validation
+            const dob = document.getElementById('dob').value;
+            if (dob === "") {
+                document.getElementById('dobError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('dobError').style.display = 'none';
+            }
+
+            // Email validation
+            const email = document.getElementById('email').value.trim();
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('emailError').style.display = 'none';
+            }
+
+            // Phone validation
+            const phone = document.getElementById('phone').value.trim();
+            const phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                document.getElementById('phoneError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('phoneError').style.display = 'none';
+            }
+
+            // Gender validation
+            const gender = document.querySelector('input[name="gender"]:checked');
+            if (!gender) {
+                document.getElementById('genderError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('genderError').style.display = 'none';
+            }
+
+            // Subject validation
+            const subjects = document.querySelectorAll('input[name="subject"]:checked');
+            if (subjects.length === 0 || subjects.length > 3) {
+                document.getElementById('subjectError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('subjectError').style.display = 'none';
+            }
+
+            // Center validation
+            const center = document.getElementById('center').value;
+            if (center === "") {
+                document.getElementById('centerError').style.display = 'block';
+                valid = false;
+            } else {
+                document.getElementById('centerError').style.display = 'none';
+            }
+
+            // If the form is valid, submit the form
+            if (valid) {
+                alert("Form submitted successfully!");
+                this.reset();  // Reset the form
+            }
+        });
+    </script> -->
+
+</body>
+</html>

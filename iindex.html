@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trigonometric Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1c0404;
+        }
+
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(6, 6, 6, 0.1);
+        }
+
+        .calculator input {
+            width: 96%;
+            height: 50px;
+            text-align: right;
+            font-size: 24px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .calculator-btn {
+            color: blue; /* Text color */
+            background-color: orange; /* Button background */
+            height: 80px; /* Large height */
+            width: 100%; /* Full width */
+            font-size: 24px; /* Large text */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .calculator-btn:hover {
+            background-color: darkorange;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .row button {
+            flex: 1;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+
+        <div class="row">
+            <button class="calculator-btn" onclick="appendNumber('7')">7</button>
+            <button class="calculator-btn" onclick="appendNumber('8')">8</button>
+            <button class="calculator-btn" onclick="appendNumber('9')">9</button>
+            <button class="calculator-btn" onclick="operate('/')">/</button>
+        </div>
+
+        <div class="row">
+            <button class="calculator-btn" onclick="appendNumber('4')">4</button>
+            <button class="calculator-btn" onclick="appendNumber('5')">5</button>
+            <button class="calculator-btn" onclick="appendNumber('6')">6</button>
+            <button class="calculator-btn" onclick="operate('*')">*</button>
+        </div>
+
+        <div class="row">
+            <button class="calculator-btn" onclick="appendNumber('1')">1</button>
+            <button class="calculator-btn" onclick="appendNumber('2')">2</button>
+            <button class="calculator-btn" onclick="appendNumber('3')">3</button>
+            <button class="calculator-btn" onclick="operate('-')">-</button>
+        </div>
+
+        <div class="row">
+            <button class="calculator-btn" onclick="clearDisplay()">C</button>
+            <button class="calculator-btn" onclick="appendNumber('0')">0</button>
+            <button class="calculator-btn" onclick="calculate()">=</button>
+            <button class="calculator-btn" onclick="operate('+')">+</button>
+        </div>
+
+        <!-- Row for Trigonometric Functions -->
+        <div class="row">
+            <button class="calculator-btn" onclick="calculateTrig('sin')">sin</button>
+            <button class="calculator-btn" onclick="calculateTrig('cos')">cos</button>
+            <button class="calculator-btn" onclick="calculateTrig('tan')">tan</button>
+        </div>
+    </div>
+
+    <script>
+        let display = document.getElementById('display');
+        let currentOperation = '';
+        let firstOperand = '';
+        let secondOperand = '';
+        let operator = '';
+
+        function appendNumber(number) {
+            if (operator === '') {
+                firstOperand += number;
+                display.value = firstOperand;
+            } else {
+                secondOperand += number;
+                display.value = secondOperand;
+            }
+        }
+
+        function operate(selectedOperator) {
+            if (firstOperand !== '') {
+                operator = selectedOperator;
+                display.value = '';
+            }
+        }
+
+        function calculate() {
+            let result = 0;
+            const num1 = parseFloat(firstOperand);
+            const num2 = parseFloat(secondOperand);
+
+            switch (operator) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    result = num1 / num2;
+                    break;
+                default:
+                    return;
+            }
+
+            display.value = result;
+            resetCalculator();
+        }
+
+        function calculateTrig(trigFunc) {
+            let result = 0;
+            const num = parseFloat(firstOperand);
+
+            switch (trigFunc) {
+                case 'sin':
+                    result = Math.sin(num * Math.PI / 180); // Convert to radians
+                    break;
+                case 'cos':
+                    result = Math.cos(num * Math.PI / 180); // Convert to radians
+                    break;
+                case 'tan':
+                    result = Math.tan(num * Math.PI / 180); // Convert to radians
+                    break;
+                case 'sec':
+                    result = 1 / Math.cos(num * Math.PI / 180); // Secant is 1/cos
+                    break;
+                default:
+                    return;
+            }
+
+            display.value = result;
+            resetCalculator();
+        }
+
+        function clearDisplay() {
+            display.value = '';
+            resetCalculator();
+        }
+
+        function resetCalculator() {
+            firstOperand = '';
+            secondOperand = '';
+            operator = '';
+        }
+    </script>
+
+</body>
+</html>
